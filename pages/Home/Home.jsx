@@ -10,12 +10,15 @@ import { Txt } from "../../components/Txt/Txt";
 import {MeteoBasic} from "../../components/MeteoBasic/MeteoBasic";
 import { getWeatherInterpretation } from "../../services/meteo-service";
 import {MeteoAdvanced} from "../../components/MeteoAdvanced/MeteoAdvanced";
+import {useNavigation} from "@react-navigation/native";
+import {Container} from "../../components/Container/Container";
 
 export function Home({}) {
     const [coords, setCoords] = useState();
     const [weather, setWeather] = useState();
     const [city, setCity] = useState();
     const currentWeather = weather?.current_weather;
+    const nav = useNavigation();
 
     useEffect(() => {
         getUserCoords();
@@ -53,31 +56,38 @@ export function Home({}) {
         );
         setCity(cityResponse);
     }
-    console.log(city);
-    return currentWeather?(
-        <>
-            <View style={s.meteo_basic}>
-                <MeteoBasic
-                    temperature={Math.round(currentWeather?.temperature)}
-                    city={city}
-                    interpretation={getWeatherInterpretation(
-                        currentWeather.weathercode
-                    )}
-                />
-            </View>
-            <View style={s.searchbar_container}>
-                <Txt style={{ fontSize: 60}}>
-                    Barre de recherche
-                </Txt>
-            </View>
-            <View style={s.meteo_advanced}>
-                <MeteoAdvanced
-                    wind={currentWeather.windspeed}
-                    dusk={weather.daily.sunrise[0].split("T")[1]}
-                    dawn={weather.daily.sunset[0].split("T")[1]}
-                />
-            </View>
-        </>
-    ):null;
+    function goToForecastPage() {
+        nav.navigate("Forecast", { city, ...weather.daily });
+    }
+    return (
+        <Container>
+            {currentWeather ? (
+                <>
+                    <View style={s.meteo_basic}>
+                        <MeteoBasic
+                            temperature={Math.round(currentWeather?.temperature)}
+                            city={city}
+                            interpretation={getWeatherInterpretation(
+                                currentWeather.weathercode
+                            )}
+                            onPress={goToForecastPage}
+                        />
+                    </View>
+                    <View style={s.searchbar_container}>
+                        <Txt style={{ fontSize: 60}}>
+                            Barre de recherche
+                        </Txt>
+                    </View>
+                    <View style={s.meteo_advanced}>
+                        <MeteoAdvanced
+                            wind={currentWeather.windspeed}
+                            dusk={weather.daily.sunrise[0].split("T")[1]}
+                            dawn={weather.daily.sunset[0].split("T")[1]}
+                        />
+                    </View>
+                </>
+            ) : null}
+        </Container>
+    );
 }
 
