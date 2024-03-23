@@ -8,4 +8,17 @@ export class MeteoAPI {
         }
         return response.json();
     }
+
+    static async fetchCityFromCoords(coords) {
+        const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${coords.lat}&lon=${coords.lng}`,
+        );
+        if (!response.ok) {
+            throw new Error('Erreur de réseau');
+        }
+        const data = await response.json();
+        const { address: { city, village, town } } = data;
+        return city || village || town;
+    }
 }
+

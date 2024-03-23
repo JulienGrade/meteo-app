@@ -7,7 +7,7 @@ const s = StyleSheet.create({
     weather_label: {
         alignSelf: "flex-end",
         transform: [{ rotate: "-90deg" }],
-        fontSize: 20,
+        fontSize: 15,
     },
     image: {
         height: 90,
