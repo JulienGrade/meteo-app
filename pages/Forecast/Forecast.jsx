@@ -3,6 +3,7 @@ import { Txt } from "../../components/Txt/Txt.jsx";
 import { s } from "./Forecast.style.js";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { TouchableOpacity, View } from "react-native";
+import {ForecastListItem} from "../../components/ForecastListItem/ForecastListItem";
 
 export function Forecast({}) {
     const { params } = useRoute();
@@ -24,6 +25,53 @@ export function Forecast({}) {
             </View>
         </>
     );
-    return <Container>{header}</Container>;
+    return (<Container>
+        {header}
+        <View style={{ marginTop: 50 }}>
+            <ForecastListItem
+                image={require("../../assets/clouds.png")}
+                day="LUN"
+                date="03/11/2023"
+                temperature={14}
+            />
+            <ForecastListItem
+                image={require("../../assets/clouds.png")}
+                day="LUN"
+                date="03/11/2023"
+                temperature={14}
+            />
+            <ForecastListItem
+                image={require("../../assets/clouds.png")}
+                day="LUN"
+                date="03/11/2023"
+                temperature={14}
+            />
+            <ForecastListItem
+                image={require("../../assets/clouds.png")}
+                day="LUN"
+                date="03/11/2023"
+                temperature={14}
+            />
+            <ForecastListItem
+                image={require("../../assets/clouds.png")}
+                day="LUN"
+                date="03/11/2023"
+                temperature={14}
+            />
+            <ForecastListItem
+                image={require("../../assets/clouds.png")}
+                day="LUN"
+                date="03/11/2023"
+                temperature={14}
+            />
+            <ForecastListItem
+                image={require("../../assets/clouds.png")}
+                day="LUN"
+                date="03/11/2023"
+                temperature={14}
+            />
+        </View>
+    </Container>
+);
 }
 
