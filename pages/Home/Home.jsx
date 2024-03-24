@@ -12,6 +12,7 @@ import { getWeatherInterpretation } from "../../services/meteo-service";
 import {MeteoAdvanced} from "../../components/MeteoAdvanced/MeteoAdvanced";
 import {useNavigation} from "@react-navigation/native";
 import {Container} from "../../components/Container/Container";
+import {Searchbar} from "../../components/Searchbar/Searchbar";
 
 export function Home({}) {
     const [coords, setCoords] = useState();
@@ -74,9 +75,7 @@ export function Home({}) {
                         />
                     </View>
                     <View style={s.searchbar_container}>
-                        <Txt style={{ fontSize: 60}}>
-                            Barre de recherche
-                        </Txt>
+                        <Searchbar />
                     </View>
                     <View style={s.meteo_advanced}>
                         <MeteoAdvanced
